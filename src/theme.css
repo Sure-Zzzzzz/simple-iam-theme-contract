@@ -1,0 +1,439 @@
+[data-iam-theme="light"],
+html:not([data-iam-theme]) {
+  --iam-color-canvas: #f4f7fb;
+  --iam-color-surface: #ffffff;
+  --iam-color-surface-raised: #ffffff;
+  --iam-color-surface-soft: #eef3f9;
+  --iam-color-text-primary: #182230;
+  --iam-color-text-secondary: #5f6b7a;
+  --iam-color-text-disabled: #98a2b3;
+  --iam-color-border: #d9e1ec;
+  --iam-color-border-strong: #b7c4d6;
+  --iam-color-primary: #1d4ed8;
+  --iam-color-primary-hover: #1e40af;
+  --iam-color-primary-active: #1e3a8a;
+  --iam-color-primary-weak: #e0eaff;
+  --iam-color-primary-text: #ffffff;
+  --iam-color-focus-ring: #2563eb;
+  --iam-color-success: #157347;
+  --iam-color-success-bg: #def7e8;
+  --iam-color-warning: #9a5b00;
+  --iam-color-warning-bg: #fff4d6;
+  --iam-color-danger: #b42318;
+  --iam-color-danger-bg: #fee4e2;
+  --iam-color-info: #175cd3;
+  --iam-color-info-bg: #e8f1ff;
+  --iam-color-overlay-scrim: #0d192f;
+  --iam-font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --iam-shadow-card: 0 12px 32px rgb(22 34 51 / 10%);
+  --iam-shadow-overlay: 0 24px 64px rgb(22 34 51 / 22%);
+  --iam-radius-control: 9px;
+  --iam-radius-card: 16px;
+  --iam-motion-duration-fast: 160ms;
+}
+
+[data-iam-theme="dark"] {
+  --iam-color-canvas: #111827;
+  --iam-color-surface: #182230;
+  --iam-color-surface-raised: #202c3d;
+  --iam-color-surface-soft: #273548;
+  --iam-color-text-primary: #f8fafc;
+  --iam-color-text-secondary: #cbd5e1;
+  --iam-color-text-disabled: #94a3b8;
+  --iam-color-border: #3b4a60;
+  --iam-color-border-strong: #54677f;
+  --iam-color-primary: #93c5fd;
+  --iam-color-primary-hover: #bfdbfe;
+  --iam-color-primary-active: #60a5fa;
+  --iam-color-primary-weak: #1e3a5f;
+  --iam-color-primary-text: #111827;
+  --iam-color-focus-ring: #bfdbfe;
+  --iam-color-success: #86efac;
+  --iam-color-success-bg: #164e37;
+  --iam-color-warning: #fde68a;
+  --iam-color-warning-bg: #713f12;
+  --iam-color-danger: #fda4af;
+  --iam-color-danger-bg: #641f2b;
+  --iam-color-info: #93c5fd;
+  --iam-color-info-bg: #1e3a5f;
+  --iam-color-overlay-scrim: #030712;
+  --iam-font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --iam-shadow-card: 0 12px 32px rgb(0 0 0 / 28%);
+  --iam-shadow-overlay: 0 24px 64px rgb(0 0 0 / 52%);
+  --iam-radius-control: 9px;
+  --iam-radius-card: 16px;
+  --iam-motion-duration-fast: 160ms;
+}
+
+[data-iam-theme="custom"] {
+  --iam-color-canvas: #f4f7fb;
+  --iam-color-surface: #ffffff;
+  --iam-color-surface-raised: #ffffff;
+  --iam-color-surface-soft: #eef3f9;
+  --iam-color-text-primary: #182230;
+  --iam-color-text-secondary: #5f6b7a;
+  --iam-color-text-disabled: #98a2b3;
+  --iam-color-border: #d9e1ec;
+  --iam-color-border-strong: #b7c4d6;
+  --iam-color-primary: #1d4ed8;
+  --iam-color-primary-hover: #1e40af;
+  --iam-color-primary-active: #1e3a8a;
+  --iam-color-primary-weak: #e0eaff;
+  --iam-color-primary-text: #ffffff;
+  --iam-color-focus-ring: #2563eb;
+  --iam-color-success: #157347;
+  --iam-color-success-bg: #def7e8;
+  --iam-color-warning: #9a5b00;
+  --iam-color-warning-bg: #fff4d6;
+  --iam-color-danger: #b42318;
+  --iam-color-danger-bg: #fee4e2;
+  --iam-color-info: #175cd3;
+  --iam-color-info-bg: #e8f1ff;
+  --iam-color-overlay-scrim: #0d192f;
+  --iam-font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --iam-shadow-card: 0 12px 32px rgb(22 34 51 / 10%);
+  --iam-shadow-overlay: 0 24px 64px rgb(22 34 51 / 22%);
+  --iam-radius-control: 9px;
+  --iam-radius-card: 16px;
+  --iam-motion-duration-fast: 160ms;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-iam-theme] {
+    --iam-motion-duration-fast: 0ms;
+  }
+}
+
+.button-primary,
+.button-secondary,
+.button-danger {
+  border-radius: var(--iam-radius-control);
+  cursor: pointer;
+  font-weight: 700;
+  min-height: 38px;
+  padding: 8px 12px;
+}
+
+.button-primary {
+  background: var(--iam-primary);
+  border: 1px solid var(--iam-primary);
+  color: var(--iam-surface);
+}
+
+.button-primary:hover {
+  background: var(--iam-primary-hover);
+  border-color: var(--iam-primary-hover);
+}
+
+.button-primary:active {
+  background: var(--iam-primary-active);
+  border-color: var(--iam-primary-active);
+}
+
+.button-secondary {
+  background: var(--iam-surface);
+  border: 1px solid var(--iam-border);
+  color: var(--iam-text);
+}
+
+.button-secondary:hover {
+  background: var(--iam-surface-soft);
+  border-color: var(--iam-primary);
+  color: var(--iam-primary);
+}
+
+.button-danger {
+  background: var(--iam-danger-bg);
+  border: 1px solid transparent;
+  color: var(--iam-danger);
+}
+
+.button-danger:hover {
+  border-color: var(--iam-danger);
+}
+
+.drawer-backdrop,
+.dialog-backdrop {
+  align-items: stretch;
+  background: color-mix(in srgb, var(--iam-scrim) 42%, transparent);
+  display: flex;
+  inset: 0;
+  justify-content: flex-end;
+  position: fixed;
+  z-index: 100;
+}
+
+.dialog-backdrop {
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.entity-drawer {
+  background: var(--iam-surface);
+  box-shadow: var(--iam-shadow-overlay);
+  display: flex;
+  flex-direction: column;
+  max-width: var(--iam-drawer-inline-size, 620px);
+  outline: none;
+  overflow: hidden;
+  width: min(var(--iam-drawer-inline-size, 620px), 100vw);
+}
+
+/* 详情/列表型抽屉宽档：多 section 或表格内容时使用 */
+.entity-drawer-wide {
+  --iam-drawer-inline-size: 780px;
+}
+
+.drawer-header {
+  align-items: flex-start;
+  border-bottom: 1px solid var(--iam-border);
+  display: flex;
+  justify-content: space-between;
+  padding: 24px 26px 18px;
+}
+
+.drawer-header p {
+  color: var(--iam-muted);
+  font-size: 12px;
+  margin: 0 0 6px;
+}
+
+.drawer-header h2 {
+  font-size: 21px;
+  letter-spacing: -.03em;
+  margin: 0;
+}
+
+.icon-button {
+  background: transparent;
+  border: 0;
+  color: var(--iam-muted);
+  cursor: pointer;
+  font-size: 26px;
+  line-height: 1;
+  padding: 0 4px;
+}
+
+.icon-button:hover {
+  color: var(--iam-text);
+}
+
+.drawer-content {
+  overflow-y: auto;
+  padding: 24px 26px 34px;
+}
+
+.drawer-form {
+  display: grid;
+  gap: 16px;
+}
+
+.drawer-form label {
+  display: grid;
+  font-size: 13px;
+  font-weight: 700;
+  gap: 7px;
+}
+
+.drawer-form input,
+.drawer-form textarea {
+  background: var(--iam-surface);
+  border: 1px solid var(--iam-border);
+  border-radius: var(--iam-radius-control);
+  color: var(--iam-text);
+  padding: 10px 11px;
+}
+
+.drawer-form textarea {
+  min-height: 96px;
+}
+
+.drawer-form select {
+  background: var(--iam-surface);
+  border: 1px solid var(--iam-border);
+  border-radius: var(--iam-radius-control);
+  color: var(--iam-text);
+  min-height: 42px;
+  padding: 8px 10px;
+  width: 100%;
+}
+
+.drawer-actions {
+  display: flex;
+  flex: 0 0 auto;
+  gap: 10px;
+  justify-content: flex-end;
+  margin-top: 8px;
+}
+
+.confirm-dialog {
+  background: var(--iam-surface);
+  border-radius: var(--iam-radius-card);
+  box-shadow: var(--iam-shadow-overlay);
+  max-width: 410px;
+  padding: 26px;
+  text-align: center;
+  width: 100%;
+}
+
+.danger-icon {
+  align-items: center;
+  background: var(--iam-danger-bg);
+  border-radius: 50%;
+  color: var(--iam-danger);
+  display: inline-flex;
+  font-size: 20px;
+  font-weight: 800;
+  height: 42px;
+  justify-content: center;
+  width: 42px;
+}
+
+.confirm-icon {
+  align-items: center;
+  background: var(--iam-primary-weak);
+  border-radius: 50%;
+  color: var(--iam-primary);
+  display: inline-flex;
+  font-size: 20px;
+  font-weight: 800;
+  height: 42px;
+  justify-content: center;
+  width: 42px;
+}
+
+.confirm-dialog h2 {
+  font-size: 19px;
+  margin: 15px 0 8px;
+}
+
+.confirm-dialog p {
+  color: var(--iam-muted);
+  font-size: 14px;
+  line-height: 1.6;
+  margin: 0;
+}
+
+.confirm-dialog footer {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  margin-top: 24px;
+}
+
+.pagination {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 16px;
+  justify-content: flex-end;
+  padding: 14px 16px;
+}
+
+.pagination-size-selector {
+  margin-right: auto;
+}
+
+.pagination-size-selector select {
+  background: var(--iam-surface);
+  border: 1px solid var(--iam-border);
+  border-radius: var(--iam-radius-control);
+  color: var(--iam-text);
+  cursor: pointer;
+  font-size: 13px;
+  min-height: 30px;
+  padding: 4px 8px;
+}
+
+.pagination-pages {
+  align-items: center;
+  display: flex;
+  gap: 4px;
+}
+
+.pagination-pages button {
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: var(--iam-radius-control);
+  color: var(--iam-text);
+  cursor: pointer;
+  font-size: 13px;
+  min-height: 30px;
+  min-width: 30px;
+  padding: 4px 10px;
+  transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+}
+
+.pagination-pages button:hover {
+  color: var(--iam-primary);
+}
+
+.pagination-pages button.active {
+  background: var(--iam-primary);
+  color: var(--iam-surface);
+  font-weight: 600;
+}
+
+.pagination-pages button:disabled {
+  color: var(--iam-muted);
+  cursor: not-allowed;
+  opacity: 0.45;
+}
+
+.pagination-pages button.pagination-step {
+  border-color: var(--iam-border);
+  color: var(--iam-muted);
+  padding: 4px 12px;
+}
+
+.pagination-pages button.pagination-step:hover:not(:disabled) {
+  border-color: var(--iam-primary);
+  color: var(--iam-primary);
+}
+
+.pagination-pages span {
+  color: var(--iam-muted);
+  min-width: 18px;
+  text-align: center;
+}
+
+.page-header {
+  align-items: flex-end;
+  display: flex;
+  gap: 24px;
+  justify-content: space-between;
+}
+
+.page-header h1 {
+  font-size: 20px;
+  letter-spacing: -0.02em;
+  margin: 4px 0 8px;
+}
+
+.page-header > div:first-child > p:last-child {
+  color: var(--iam-muted);
+  margin: 0;
+  max-width: 660px;
+}
+
+.page-header-actions {
+  display: flex;
+  flex: 0 0 auto;
+  gap: 10px;
+}
+
+@media (max-width: 760px) {
+  .page-header {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .page-header-actions > * {
+    width: 100%;
+  }
+
+  .entity-drawer {
+    max-width: 100%;
+  }
+}

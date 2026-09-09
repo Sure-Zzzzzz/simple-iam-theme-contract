@@ -1,0 +1,14 @@
+node_modules/
+dist/
+coverage/
+*.log
+.env
+.env.*
+!.env.example
+
+# 本机测试、发布与凭据文件
+**/LOCAL*
+.npmrc
+
+# 设计先行文档，落地后以 README 为唯一事实标准
+DESIGN*
