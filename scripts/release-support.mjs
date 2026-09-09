@@ -66,7 +66,7 @@ export function npm(args, options = {}) {
 
 export function pnpm(args, options = {}) {
   return process.platform === 'win32'
-    ? command('corepack', ['pnpm', ...args], options)
+    ? command('corepack.cmd', ['pnpm', ...args], { shell: true, ...options })
     : command('pnpm', args, options);
 }
 
