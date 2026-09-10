@@ -1,6 +1,6 @@
 {
   "name": "@sure-zzzzzz/simple-iam-theme-contract",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Versioned IAM theme tokens, TypeScript contracts, and safe custom-theme validation for microfrontends.",
   "license": "Apache-2.0",
   "author": "surezzzzzz",

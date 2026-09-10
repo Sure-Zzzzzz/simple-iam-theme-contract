@@ -115,47 +115,47 @@ html:not([data-iam-theme]) {
 }
 
 .button-primary {
-  background: var(--iam-primary);
-  border: 1px solid var(--iam-primary);
-  color: var(--iam-surface);
+  background: var(--iam-color-primary);
+  border: 1px solid var(--iam-color-primary);
+  color: var(--iam-color-surface);
 }
 
 .button-primary:hover {
-  background: var(--iam-primary-hover);
-  border-color: var(--iam-primary-hover);
+  background: var(--iam-color-primary-hover);
+  border-color: var(--iam-color-primary-hover);
 }
 
 .button-primary:active {
-  background: var(--iam-primary-active);
-  border-color: var(--iam-primary-active);
+  background: var(--iam-color-primary-active);
+  border-color: var(--iam-color-primary-active);
 }
 
 .button-secondary {
-  background: var(--iam-surface);
-  border: 1px solid var(--iam-border);
-  color: var(--iam-text);
+  background: var(--iam-color-surface);
+  border: 1px solid var(--iam-color-border);
+  color: var(--iam-color-text-primary);
 }
 
 .button-secondary:hover {
-  background: var(--iam-surface-soft);
-  border-color: var(--iam-primary);
-  color: var(--iam-primary);
+  background: var(--iam-color-surface-soft);
+  border-color: var(--iam-color-primary);
+  color: var(--iam-color-primary);
 }
 
 .button-danger {
-  background: var(--iam-danger-bg);
+  background: var(--iam-color-danger-bg);
   border: 1px solid transparent;
-  color: var(--iam-danger);
+  color: var(--iam-color-danger);
 }
 
 .button-danger:hover {
-  border-color: var(--iam-danger);
+  border-color: var(--iam-color-danger);
 }
 
 .drawer-backdrop,
 .dialog-backdrop {
   align-items: stretch;
-  background: color-mix(in srgb, var(--iam-scrim) 42%, transparent);
+  background: color-mix(in srgb, var(--iam-color-overlay-scrim) 42%, transparent);
   display: flex;
   inset: 0;
   justify-content: flex-end;
@@ -170,7 +170,7 @@ html:not([data-iam-theme]) {
 }
 
 .entity-drawer {
-  background: var(--iam-surface);
+  background: var(--iam-color-surface);
   box-shadow: var(--iam-shadow-overlay);
   display: flex;
   flex-direction: column;
@@ -187,14 +187,14 @@ html:not([data-iam-theme]) {
 
 .drawer-header {
   align-items: flex-start;
-  border-bottom: 1px solid var(--iam-border);
+  border-bottom: 1px solid var(--iam-color-border);
   display: flex;
   justify-content: space-between;
   padding: 24px 26px 18px;
 }
 
 .drawer-header p {
-  color: var(--iam-muted);
+  color: var(--iam-color-text-secondary);
   font-size: 12px;
   margin: 0 0 6px;
 }
@@ -208,7 +208,7 @@ html:not([data-iam-theme]) {
 .icon-button {
   background: transparent;
   border: 0;
-  color: var(--iam-muted);
+  color: var(--iam-color-text-secondary);
   cursor: pointer;
   font-size: 26px;
   line-height: 1;
@@ -216,7 +216,7 @@ html:not([data-iam-theme]) {
 }
 
 .icon-button:hover {
-  color: var(--iam-text);
+  color: var(--iam-color-text-primary);
 }
 
 .drawer-content {
@@ -238,10 +238,10 @@ html:not([data-iam-theme]) {
 
 .drawer-form input,
 .drawer-form textarea {
-  background: var(--iam-surface);
-  border: 1px solid var(--iam-border);
+  background: var(--iam-color-surface);
+  border: 1px solid var(--iam-color-border);
   border-radius: var(--iam-radius-control);
-  color: var(--iam-text);
+  color: var(--iam-color-text-primary);
   padding: 10px 11px;
 }
 
@@ -250,10 +250,10 @@ html:not([data-iam-theme]) {
 }
 
 .drawer-form select {
-  background: var(--iam-surface);
-  border: 1px solid var(--iam-border);
+  background: var(--iam-color-surface);
+  border: 1px solid var(--iam-color-border);
   border-radius: var(--iam-radius-control);
-  color: var(--iam-text);
+  color: var(--iam-color-text-primary);
   min-height: 42px;
   padding: 8px 10px;
   width: 100%;
@@ -268,7 +268,7 @@ html:not([data-iam-theme]) {
 }
 
 .confirm-dialog {
-  background: var(--iam-surface);
+  background: var(--iam-color-surface);
   border-radius: var(--iam-radius-card);
   box-shadow: var(--iam-shadow-overlay);
   max-width: 410px;
@@ -279,9 +279,9 @@ html:not([data-iam-theme]) {
 
 .danger-icon {
   align-items: center;
-  background: var(--iam-danger-bg);
+  background: var(--iam-color-danger-bg);
   border-radius: 50%;
-  color: var(--iam-danger);
+  color: var(--iam-color-danger);
   display: inline-flex;
   font-size: 20px;
   font-weight: 800;
@@ -292,9 +292,9 @@ html:not([data-iam-theme]) {
 
 .confirm-icon {
   align-items: center;
-  background: var(--iam-primary-weak);
+  background: var(--iam-color-primary-weak);
   border-radius: 50%;
-  color: var(--iam-primary);
+  color: var(--iam-color-primary);
   display: inline-flex;
   font-size: 20px;
   font-weight: 800;
@@ -309,7 +309,7 @@ html:not([data-iam-theme]) {
 }
 
 .confirm-dialog p {
-  color: var(--iam-muted);
+  color: var(--iam-color-text-secondary);
   font-size: 14px;
   line-height: 1.6;
   margin: 0;
@@ -336,10 +336,10 @@ html:not([data-iam-theme]) {
 }
 
 .pagination-size-selector select {
-  background: var(--iam-surface);
-  border: 1px solid var(--iam-border);
+  background: var(--iam-color-surface);
+  border: 1px solid var(--iam-color-border);
   border-radius: var(--iam-radius-control);
-  color: var(--iam-text);
+  color: var(--iam-color-text-primary);
   cursor: pointer;
   font-size: 13px;
   min-height: 30px;
@@ -356,7 +356,7 @@ html:not([data-iam-theme]) {
   background: transparent;
   border: 1px solid transparent;
   border-radius: var(--iam-radius-control);
-  color: var(--iam-text);
+  color: var(--iam-color-text-primary);
   cursor: pointer;
   font-size: 13px;
   min-height: 30px;
@@ -366,34 +366,34 @@ html:not([data-iam-theme]) {
 }
 
 .pagination-pages button:hover {
-  color: var(--iam-primary);
+  color: var(--iam-color-primary);
 }
 
 .pagination-pages button.active {
-  background: var(--iam-primary);
-  color: var(--iam-surface);
+  background: var(--iam-color-primary);
+  color: var(--iam-color-surface);
   font-weight: 600;
 }
 
 .pagination-pages button:disabled {
-  color: var(--iam-muted);
+  color: var(--iam-color-text-secondary);
   cursor: not-allowed;
   opacity: 0.45;
 }
 
 .pagination-pages button.pagination-step {
-  border-color: var(--iam-border);
-  color: var(--iam-muted);
+  border-color: var(--iam-color-border);
+  color: var(--iam-color-text-secondary);
   padding: 4px 12px;
 }
 
 .pagination-pages button.pagination-step:hover:not(:disabled) {
-  border-color: var(--iam-primary);
-  color: var(--iam-primary);
+  border-color: var(--iam-color-primary);
+  color: var(--iam-color-primary);
 }
 
 .pagination-pages span {
-  color: var(--iam-muted);
+  color: var(--iam-color-text-secondary);
   min-width: 18px;
   text-align: center;
 }
@@ -412,7 +412,7 @@ html:not([data-iam-theme]) {
 }
 
 .page-header > div:first-child > p:last-child {
-  color: var(--iam-muted);
+  color: var(--iam-color-text-secondary);
   margin: 0;
   max-width: 660px;
 }
