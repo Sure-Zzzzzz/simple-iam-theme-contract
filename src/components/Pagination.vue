@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { computed } from 'vue';
+import FormSelect, { type FormSelectOption } from './FormSelect.vue';
 
 const props = defineProps<{
   current: number;
@@ -19,6 +20,10 @@ const totalPages = computed(() =>
 
 const pageSizeOpts = computed(() =>
   props.pageSizeOptions || [10, 20, 50, 100]
+);
+
+const pageSizeSelectOptions = computed<FormSelectOption[]>(() =>
+  pageSizeOpts.value.map(size => ({ label: `${size} 条/页`, value: size }))
 );
 
 const showSizeSelector = computed(() =>
@@ -49,9 +54,8 @@ function goToPage(page: number) {
   emit('update:current', page);
 }
 
-function changePageSize(event: Event) {
-  const target = event.target as HTMLSelectElement;
-  const newSize = Number(target.value);
+function changePageSize(value: string | number) {
+  const newSize = Number(value);
   emit('update:pageSize', newSize);
   if (props.current > Math.ceil(props.total / newSize)) {
     emit('update:current', 1);
@@ -62,11 +66,12 @@ function changePageSize(event: Event) {
 <template>
   <nav class="pagination">
     <div v-if="showSizeSelector" class="pagination-size-selector">
-      <select :value="pageSize" aria-label="每页条数" @change="changePageSize">
-        <option v-for="size in pageSizeOpts" :key="size" :value="size">
-          {{ size }} 条/页
-        </option>
-      </select>
+      <FormSelect
+        :model-value="pageSize"
+        :options="pageSizeSelectOptions"
+        aria-label="每页条数"
+        @change="changePageSize"
+      />
     </div>
 
     <div class="pagination-pages">

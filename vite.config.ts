@@ -10,7 +10,8 @@ export default defineConfig({
         'components/Pagination': './src/components/Pagination.vue',
         'components/Dialog': './src/components/Dialog.vue',
         'components/Drawer': './src/components/Drawer.vue',
-        'components/PageHeader': './src/components/PageHeader.vue'
+        'components/PageHeader': './src/components/PageHeader.vue',
+        'components/FormSelect': './src/components/FormSelect.vue'
       },
       formats: ['es']
     },
