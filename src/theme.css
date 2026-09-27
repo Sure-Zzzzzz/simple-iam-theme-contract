@@ -206,17 +206,143 @@ html:not([data-iam-theme]) {
 }
 
 .icon-button {
+  align-items: center;
   background: transparent;
   border: 0;
+  border-radius: 6px;
   color: var(--iam-color-text-secondary);
   cursor: pointer;
+  display: inline-flex;
+  flex: 0 0 auto;
   font-size: 26px;
+  height: 32px;
+  justify-content: center;
   line-height: 1;
-  padding: 0 4px;
+  padding: 0;
+  width: 32px;
 }
 
 .icon-button:hover {
+  background: var(--iam-color-surface-soft);
   color: var(--iam-color-text-primary);
+}
+
+.icon-button:focus-visible {
+  outline: 2px solid var(--iam-color-primary);
+  outline-offset: 2px;
+}
+
+.icon-button:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+}
+
+/* 一次性密钥展示：卡片 + 内联紧凑复制按钮 */
+.secret-reveal {
+  background: var(--iam-color-surface-soft);
+  border: 1px dashed var(--iam-color-border);
+  border-radius: var(--iam-radius-control);
+  display: grid;
+  font-size: 13px;
+  gap: 8px;
+  padding: 14px;
+}
+
+.secret-reveal-wide {
+  text-align: left;
+  width: min(560px, 100%);
+}
+
+.secret-reveal p {
+  color: var(--iam-color-text-secondary);
+  margin: 0;
+}
+
+.secret-reveal code {
+  background: var(--iam-color-surface);
+  border-radius: 6px;
+  font-family: ui-monospace, monospace;
+  padding: 8px 10px;
+  word-break: break-all;
+}
+
+.secret-line {
+  align-items: stretch;
+  display: flex;
+  gap: 8px;
+}
+
+.secret-line code {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.secret-copy {
+  align-items: center;
+  background: var(--iam-color-surface);
+  border: 1px solid var(--iam-color-border);
+  border-radius: 6px;
+  color: var(--iam-color-text-secondary);
+  cursor: pointer;
+  display: inline-flex;
+  flex: 0 0 auto;
+  font-size: 12px;
+  gap: 5px;
+  min-height: 36px;
+  padding: 0 12px;
+  transition: border-color 0.15s ease, color 0.15s ease;
+}
+
+.secret-copy:hover:not(:disabled) {
+  border-color: var(--iam-color-primary);
+  color: var(--iam-color-primary);
+}
+
+.secret-copy:focus-visible {
+  outline: 2px solid var(--iam-color-primary);
+  outline-offset: 2px;
+}
+
+.secret-copy:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+}
+
+.secret-copy.copied {
+  background: var(--iam-color-success-bg);
+  border-color: transparent;
+  color: var(--iam-color-success);
+}
+
+.secret-copy svg {
+  flex: 0 0 auto;
+}
+
+.secret-notice {
+  align-items: flex-start;
+  display: flex;
+  gap: 16px;
+  justify-content: space-between;
+}
+
+.secret-notice strong,
+.secret-notice code {
+  display: block;
+}
+
+.secret-notice code {
+  background: color-mix(in srgb, var(--iam-color-surface) 74%, transparent);
+  border-radius: 6px;
+  font-size: 13px;
+  margin-top: 8px;
+  overflow-wrap: anywhere;
+  padding: 8px;
+}
+
+.secret-notice p {
+  color: inherit;
+  font-size: 12px;
+  margin: 8px 0 0;
 }
 
 .drawer-content {
