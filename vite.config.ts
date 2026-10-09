@@ -11,7 +11,8 @@ export default defineConfig({
         'components/Dialog': './src/components/Dialog.vue',
         'components/Drawer': './src/components/Drawer.vue',
         'components/PageHeader': './src/components/PageHeader.vue',
-        'components/FormSelect': './src/components/FormSelect.vue'
+        'components/FormSelect': './src/components/FormSelect.vue',
+        'components/DataTable': './src/components/DataTable.vue'
       },
       formats: ['es']
     },

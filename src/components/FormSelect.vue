@@ -50,13 +50,43 @@ function toggle() {
     close();
     return;
   }
-  const rect = root.value?.getBoundingClientRect();
-  if (rect) {
-    const spaceBelow = window.innerHeight - rect.bottom;
-    openUp.value = spaceBelow < 264 && rect.top > spaceBelow;
-  }
+  openUp.value = shouldOpenUp();
   open.value = true;
   focusedIndex.value = selectedIndex.value >= 0 ? selectedIndex.value : (enabledIndices()[0] ?? -1);
+}
+
+/**
+ * 弹层方向判定：以“弹层实际需要的空间”为准（菜单高度上限 256px + 间距 6px ≈ 264），
+ * 分别对视口与最近的裁剪祖先（overflow 非 visible 的祖先，如圆角卡片 overflow:hidden）
+ * 计算下方可用空间——任一场景下方放不下且上方更宽裕即向上弹。
+ * 只覆盖真实需要方向的场景，不改变原有“上下都不挤”时向下弹的默认。
+ */
+function shouldOpenUp(): boolean {
+  const element = root.value;
+  if (!element) return false;
+  const rect = element.getBoundingClientRect();
+  const menuHeight = Math.min(256, Math.max(props.options.length, 1) * 36 + 8) + 6;
+  const viewportBelow = window.innerHeight - rect.bottom;
+  let clippedBelow = viewportBelow;
+  // 向上找最近的可裁剪祖先；position:absolute 的弹层会被它的 overflow 裁掉。
+  // html/body 不算：视口滚动条不裁 absolute 定位的弹层，jsdom 里 body 的
+  // overflow 计算值也不可靠，跳过避免误判。
+  let ancestor: HTMLElement | null = element.parentElement;
+  while (ancestor && ancestor !== document.body && ancestor !== document.documentElement) {
+    const overflowY = getComputedStyle(ancestor).overflowY;
+    if (overflowY !== 'visible' && overflowY !== 'clip') {
+      const ancestorRect = ancestor.getBoundingClientRect();
+      // 零面积 rect（未布局环境）给不出裁剪信息，视为不裁剪继续向上找
+      if (ancestorRect.height > 0 || ancestorRect.bottom !== 0) {
+        clippedBelow = Math.min(clippedBelow, ancestorRect.bottom - rect.bottom);
+        break;
+      }
+    }
+    ancestor = ancestor.parentElement;
+  }
+  const spaceBelow = Math.min(viewportBelow, clippedBelow);
+  const spaceAbove = rect.top;
+  return spaceBelow < menuHeight && spaceAbove > spaceBelow;
 }
 
 function close() {

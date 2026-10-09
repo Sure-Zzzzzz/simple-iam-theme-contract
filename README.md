@@ -26,6 +26,20 @@ import '@sure-zzzzzz/simple-iam-theme-contract/theme.css';
 - 主题状态按当前用户处理，业务子前端不得建立第二个主题状态源。
 - 主题相关资源不得通过任意 CSS、外部样式地址、对象存储或上传文件下发。
 
+## 组件与样式契约
+
+跨仓共享的 UI 组件与样式族随包发布，宿主仓不得本地复制同名实现（按钮、密钥展示、下拉、图标按钮等通用件一律以本包为唯一事实源；仓专属布局类留给宿主）：
+
+| 契约 | 内容 |
+| --- | --- |
+| `FormSelect`（子路径导入） | 自绘下拉选择组件：宿主 webview 中原生 `select` 弹层坐标不可靠，表单下拉统一用它（键盘 / 外点 / 滚动关闭；弹层方向同时感知视口与最近裁剪祖先，底部空间不足上翻） |
+| `Pagination`（子路径导入） | 分页组件，每页条数选择内部使用 `FormSelect` |
+| `DataTable`（子路径导入） | 声明式数据表格：`columns` 列配置 + `#cell-{key}` 作用域插槽定制特殊单元格；内置横向滚动容器、空态/加载占位行、`selectedKey` 选中高亮与 `rowClass` 行类透传。边界约束：滚动容器是弹层裁剪祖先，单元格内不得直接放绝对定位弹层 |
+| `.button-primary` / `.button-secondary` / `.button-danger` / `.icon-button` | 按钮基线；`.icon-button` 为 32×32 内联居中、hover 浅底、`focus-visible` / `disabled` 完整态 |
+| `.form-select*` | FormSelect 的配套样式段 |
+| `.secret-reveal` / `.secret-reveal-wide` / `.secret-notice` | 一次性密钥展示卡片族 |
+| `.secret-line` / `.secret-copy` | 密钥行内联紧凑复制按钮（hover 主色描边，复制成功态 `--iam-color-success`） |
+
 ## 使用主题快照
 
 ```ts
@@ -48,11 +62,13 @@ let unsubscribe = () => undefined;
 
 export function mount(props: {
   themeSnapshot: ThemeSnapshot;
-  subscribeTheme: (listener: (snapshot: ThemeSnapshot) => void) => () => void;
+  theme: {
+    subscribe: (listener: (snapshot: ThemeSnapshot) => void) => () => void;
+  };
 }) {
   applyTheme(document.documentElement, props.themeSnapshot);
   unsubscribe();
-  unsubscribe = props.subscribeTheme(snapshot => {
+  unsubscribe = props.theme.subscribe(snapshot => {
     applyTheme(document.documentElement, snapshot);
   });
 }

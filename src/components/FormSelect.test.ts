@@ -180,6 +180,24 @@ describe('FormSelect', () => {
     expect(wrapper.get('.form-select').classes()).not.toContain('form-select--up');
   });
 
+  it('opens upward when the nearest clipping ancestor leaves no room below even if the viewport does', async () => {
+    setViewportHeight(768);
+    // 模拟圆角卡片 overflow:hidden 的祖先：底边贴着触发器，视口虽有空间但弹层会被裁
+    const clipping = document.createElement('div');
+    clipping.style.overflow = 'hidden';
+    clipping.getBoundingClientRect = () => ({ top: 0, bottom: 200, height: 200 }) as DOMRect;
+    document.body.appendChild(clipping);
+    const wrapper = mount(FormSelect, {
+      props: { modelValue: 'apple', options: fruitOptions },
+      attachTo: clipping
+    });
+    wrapper.element.getBoundingClientRect = () => ({ top: 100, bottom: 140 }) as DOMRect;
+    await openMenu(wrapper);
+    expect(wrapper.get('.form-select').classes()).toContain('form-select--up');
+    wrapper.unmount();
+    clipping.remove();
+  });
+
   it('renders an empty menu without crash when options is empty', async () => {
     const wrapper = mount(FormSelect, {
       props: { modelValue: null, options: [] }
