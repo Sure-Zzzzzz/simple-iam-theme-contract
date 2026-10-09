@@ -23,12 +23,18 @@ const props = withDefaults(defineProps<{
   selectedKey?: string | number | null;
   scrollMinWidth?: string;
   rowClass?: (row: TRow) => string;
+  rowSelectable?: boolean;
 }>(), {
   loading: false,
   emptyText: '暂无数据',
   selectedKey: null,
-  scrollMinWidth: '680px'
+  scrollMinWidth: '680px',
+  rowSelectable: false
 });
+
+const emit = defineEmits<{
+  'row-select': [row: TRow];
+}>();
 
 function columnStyle(align?: 'left' | 'center' | 'right', nowrap?: boolean): {
   textAlign: 'left' | 'center' | 'right' | undefined;
@@ -55,11 +61,34 @@ function rowClasses(row: TRow): Record<string, boolean> {
   if (props.selectedKey !== null && rowKeyValue(row) === props.selectedKey) {
     classes['data-table-row-selected'] = true;
   }
+  if (props.rowSelectable) {
+    classes['data-table-row-selectable'] = true;
+  }
   const extra = props.rowClass ? props.rowClass(row) : '';
   if (extra) {
     classes[extra] = true;
   }
   return classes;
+}
+
+// 行选择仅在选择模式（rowSelectable）下可达：点击/回车/空格都发 row-select。
+// selectedKey 由宿主持有（单向数据流），组件不内嵌选中状态。
+// 键盘事件只在行自身聚焦时拦截：单元格内交互元素（按钮等）的 Enter 激活
+// 依赖默认行为，冒泡到行时 preventDefault 会吞掉它。
+function onRowAction(row: TRow): void {
+  if (props.rowSelectable) {
+    emit('row-select', row);
+  }
+}
+
+function onRowKeydown(event: KeyboardEvent, row: TRow): void {
+  if (event.target !== event.currentTarget) {
+    return;
+  }
+  if (event.key === 'Enter' || event.key === ' ') {
+    event.preventDefault();
+    onRowAction(row);
+  }
 }
 </script>
 
@@ -94,7 +123,13 @@ function rowClasses(row: TRow): Record<string, boolean> {
           <td :colspan="columns.length" class="data-table-placeholder">{{ emptyText }}</td>
         </tr>
         <template v-for="(row, index) in rows" :key="rowKeyValue(row)">
-          <tr :class="rowClasses(row)">
+          <tr
+            :class="rowClasses(row)"
+            :tabindex="rowSelectable ? 0 : undefined"
+            :aria-selected="rowSelectable ? rowKeyValue(row) === selectedKey : undefined"
+            @click="onRowAction(row)"
+            @keydown="onRowKeydown($event, row)"
+          >
             <td
               v-for="column in columns"
               :key="column.key"

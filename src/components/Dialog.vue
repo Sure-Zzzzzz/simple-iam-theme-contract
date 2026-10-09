@@ -1,13 +1,17 @@
 <script setup lang="ts">
 import { nextTick, onBeforeUnmount, onMounted, ref, watch } from 'vue';
 
-const props = defineProps<{
+const props = withDefaults(defineProps<{
   open: boolean;
   title: string;
   description: string;
   confirmLabel?: string;
   pending?: boolean;
-}>();
+  variant?: 'danger' | 'confirm';
+}>(), {
+  pending: false,
+  variant: 'danger'
+});
 
 const emit = defineEmits<{
   close: [];
@@ -50,15 +54,23 @@ onBeforeUnmount(() => document.removeEventListener('keydown', onKeydown));
       :aria-label="title"
       tabindex="-1"
     >
-      <span class="danger-icon" aria-hidden="true">!</span>
+      <span
+        :class="variant === 'confirm' ? 'confirm-icon' : 'danger-icon'"
+        aria-hidden="true"
+      >{{ variant === 'confirm' ? '✓' : '!' }}</span>
       <h2>{{ title }}</h2>
       <p>{{ description }}</p>
       <footer>
         <button class="button-secondary" type="button" :disabled="pending" @click="close">
           取消
         </button>
-        <button class="button-danger" type="button" :disabled="pending" @click="emit('confirm')">
-          {{ pending ? '正在处理…' : (confirmLabel || '确认删除') }}
+        <button
+          :class="variant === 'confirm' ? 'button-primary' : 'button-danger'"
+          type="button"
+          :disabled="pending"
+          @click="emit('confirm')"
+        >
+          {{ pending ? '正在处理…' : (confirmLabel || (variant === 'confirm' ? '确认' : '确认删除')) }}
         </button>
       </footer>
     </section>

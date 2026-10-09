@@ -104,4 +104,27 @@ describe('Dialog', () => {
     await pending.find('.dialog-backdrop').trigger('click');
     expect(pending.emitted('close')).toBeUndefined();
   });
+
+  it('defaults to danger variant with danger icon and button', () => {
+    const wrapper = mount(Dialog, {
+      props: { open: true, title: '确认', description: '描述' }
+    });
+    expect(wrapper.find('.danger-icon').exists()).toBe(true);
+    expect(wrapper.find('.confirm-icon').exists()).toBe(false);
+    expect(wrapper.find('.button-danger').exists()).toBe(true);
+    expect(wrapper.find('.button-primary').exists()).toBe(false);
+    expect(wrapper.text()).toContain('确认删除');
+  });
+
+  it('confirm variant shows check icon and primary button', async () => {
+    const wrapper = mount(Dialog, {
+      props: { open: true, title: '确认成交', description: '描述', variant: 'confirm', confirmLabel: '确认成交' }
+    });
+    expect(wrapper.find('.confirm-icon').exists()).toBe(true);
+    expect(wrapper.find('.danger-icon').exists()).toBe(false);
+    expect(wrapper.find('.button-primary').exists()).toBe(true);
+    expect(wrapper.find('.button-danger').exists()).toBe(false);
+    await wrapper.find('.button-primary').trigger('click');
+    expect(wrapper.emitted('confirm')).toHaveLength(1);
+  });
 });

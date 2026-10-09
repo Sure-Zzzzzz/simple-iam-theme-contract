@@ -25,6 +25,7 @@ interface TableOverrideProps {
   emptyText?: string;
   selectedKey?: string | number | null;
   rowClass?: (row: TestRow) => string;
+  rowSelectable?: boolean;
 }
 
 // VTU 的 mount 对 SFC 泛型组件推导受限，用实例化表达式固定行类型
@@ -125,5 +126,31 @@ describe('DataTable', () => {
     expect(headers[2].attributes('style')).toContain('white-space: nowrap');
     const firstRowCells = wrapper.findAll('tbody tr')[0].findAll('td');
     expect(firstRowCells[2].attributes('style')).toContain('text-align: right');
+  });
+
+  it('emits row-select on click and keyboard when rowSelectable, with tabindex and aria-selected', async () => {
+    const wrapper = mountTable({ rowSelectable: true, selectedKey: 2 });
+    const bodyRows = wrapper.findAll('tbody tr');
+    expect(bodyRows[0].attributes('tabindex')).toBe('0');
+    expect(bodyRows[0].attributes('aria-selected')).toBe('false');
+    expect(bodyRows[1].attributes('aria-selected')).toBe('true');
+    expect(bodyRows[0].classes()).toContain('data-table-row-selectable');
+    await bodyRows[0].trigger('click');
+    expect(wrapper.emitted('row-select')![0][0]).toEqual(rows[0]);
+    await bodyRows[1].trigger('keydown', { key: 'Enter' });
+    expect(wrapper.emitted('row-select')!.at(-1)![0]).toEqual(rows[1]);
+    await bodyRows[1].trigger('keydown', { key: ' ' });
+    expect(wrapper.emitted('row-select')!.at(-1)![0]).toEqual(rows[1]);
+  });
+
+  it('keeps rows non-interactive without rowSelectable for backward compatibility', async () => {
+    const wrapper = mountTable({ selectedKey: 1 });
+    const bodyRow = wrapper.find('tbody tr');
+    expect(bodyRow.attributes('tabindex')).toBeUndefined();
+    expect(bodyRow.attributes('aria-selected')).toBeUndefined();
+    expect(bodyRow.classes()).not.toContain('data-table-row-selectable');
+    await bodyRow.trigger('click');
+    await bodyRow.trigger('keydown', { key: 'Enter' });
+    expect(wrapper.emitted('row-select')).toBeUndefined();
   });
 });

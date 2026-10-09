@@ -715,3 +715,56 @@ html:not([data-iam-theme]) {
   padding: 28px 12px;
   text-align: center;
 }
+
+/* ==================== DataTable 行选择可达段（1.0.5） ==================== */
+/* rowSelectable 模式：行即选择器（点击/回车/空格），选中态沿用 data-table-row-selected */
+.data-table tbody tr.data-table-row-selectable {
+  cursor: pointer;
+}
+
+.data-table tbody tr.data-table-row-selectable:focus-visible {
+  outline: 2px solid var(--iam-color-focus-ring);
+  outline-offset: -2px;
+}
+
+/* ==================== 通用样式族收编（1.0.5） ==================== */
+/* 六仓重复实现的通用样式族收编为唯一事实源；全部纯 tokens，宿主删除本地同名实现即可 */
+
+/* 状态徽章：胶囊四态（success/warning/danger/neutral），缺省 info */
+.status-badge { display: inline-flex; align-items: center; border-radius: 999px; background: var(--iam-color-info-bg); color: var(--iam-color-info); font-size: 12px; font-weight: 600; padding: 4px 9px; }
+.status-badge.success { background: var(--iam-color-success-bg); color: var(--iam-color-success); }
+.status-badge.warning { background: var(--iam-color-warning-bg); color: var(--iam-color-warning); }
+.status-badge.danger { background: var(--iam-color-danger-bg); color: var(--iam-color-danger); }
+.status-badge.neutral { background: var(--iam-color-surface-soft); color: var(--iam-color-text-secondary); }
+
+/* 表格行内动作钮：文字与图标形态通用（尺寸自适应内容） */
+.table-action { display: inline-flex; align-items: center; justify-content: center; gap: 6px; min-height: 34px; padding: 6px 12px; border: 1px solid var(--iam-color-border); border-radius: var(--iam-radius-control); background: var(--iam-color-surface); color: var(--iam-color-text-primary); cursor: pointer; font-size: 13px; font-weight: 600; text-decoration: none; }
+.table-action:hover:not(:disabled) { background: var(--iam-color-surface-soft); border-color: var(--iam-color-primary); color: var(--iam-color-primary); }
+.table-action:disabled { cursor: default; opacity: 0.55; }
+
+/* 提示条：内联横幅基线（悬浮定位等布局差异由宿主覆写），success/error 配色契约统一 */
+.admin-message { border: 1px solid var(--iam-color-border); border-radius: var(--iam-radius-control); margin: 0; padding: 12px 14px; }
+.admin-message.success { background: var(--iam-color-success-bg); border-color: var(--iam-color-success); color: var(--iam-color-success); }
+.admin-message.error { background: var(--iam-color-danger-bg); border-color: var(--iam-color-danger); color: var(--iam-color-danger); }
+
+/* 数据卡容器：admin-data-surface（工具栏+表格一体化卡，overflow 裁剪）与 panel（留白整卡） */
+.admin-data-surface { background: var(--iam-color-surface); border: 1px solid var(--iam-color-border); border-radius: var(--iam-radius-card); box-shadow: var(--iam-shadow-card); overflow: hidden; }
+.panel { background: var(--iam-color-surface); border: 1px solid var(--iam-color-border); border-radius: var(--iam-radius-card); box-shadow: var(--iam-shadow-card); min-width: 0; padding: 24px; }
+
+/* 空态卡：dashed 占位容器（标题+描述+可选动作），最小高度宿主可覆写 */
+.admin-empty-state { align-content: center; align-items: center; background: var(--iam-color-surface); border: 1px dashed var(--iam-color-border); border-radius: var(--iam-radius-card); display: grid; justify-items: center; min-height: 240px; padding: 28px; text-align: center; }
+.admin-empty-state h2, .admin-empty-state h3 { font-size: 18px; margin: 0 0 8px; }
+.admin-empty-state p { color: var(--iam-color-text-secondary); font-size: 14px; margin: 0; max-width: 400px; }
+
+/* 键值详情：dl 语义形态（dt 标签列 + dd 内容列） */
+.detail-list { display: grid; grid-template-columns: 96px 1fr; gap: 8px 16px; margin: 0; }
+.detail-list dt { color: var(--iam-color-text-secondary); font-size: 12px; font-weight: 700; }
+.detail-list dd { margin: 0; overflow-wrap: anywhere; }
+
+/* 指标卡：数字指标单元（label+图标+大数字+注脚）与自适应网格 */
+.metric-cards { display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); }
+.metric-card { background: var(--iam-color-surface); border: 1px solid var(--iam-color-border); border-radius: var(--iam-radius-card); box-shadow: var(--iam-shadow-card); display: grid; gap: 6px; padding: 18px 20px; }
+.metric-card .metric-label { align-items: center; color: var(--iam-color-text-secondary); display: flex; font-size: 13px; font-weight: 700; gap: 7px; }
+.metric-card .metric-label .dashboard-icon { color: var(--iam-color-primary); height: 17px; width: 17px; }
+.metric-card strong { color: var(--iam-color-text-primary); font-size: 30px; line-height: 1; }
+.metric-card p { color: var(--iam-color-text-secondary); font-size: 12px; margin: 0; }
